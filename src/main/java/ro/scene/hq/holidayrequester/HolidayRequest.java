@@ -12,21 +12,15 @@ public class HolidayRequest {
     private int days;
 
     public void send() {
-        new Email(employee, manager,
-                EmailTemplate.getSubject(EmailTemplate.MailType.REQUEST, employee, fromDate, toDate()),
-                EmailTemplate.getBody(EmailTemplate.MailType.REQUEST, employee, fromDate, toDate())).send();
+        sendEmail(employee, manager, EmailTemplate.MailType.REQUEST);
     }
 
     public void accept() {
-        new Email(manager, SystemConfiguration.HR_IDENTITY,
-                EmailTemplate.getSubject(EmailTemplate.MailType.ACCEPT, employee, fromDate, toDate()),
-                EmailTemplate.getBody(EmailTemplate.MailType.ACCEPT, employee, fromDate, toDate())).send();
+        sendEmail(manager, SystemConfiguration.HR_IDENTITY, EmailTemplate.MailType.ACCEPT);
     }
 
     public void reject() {
-        new Email(manager, employee,
-                EmailTemplate.getSubject(EmailTemplate.MailType.REJECT, employee, fromDate, toDate()),
-                EmailTemplate.getBody(EmailTemplate.MailType.REJECT, employee, fromDate, toDate())).send();
+        sendEmail(manager, employee, EmailTemplate.MailType.REJECT);
     }
 
     public HolidayRequest fromEmployee(Identity employee) {
@@ -47,6 +41,12 @@ public class HolidayRequest {
     public HolidayRequest lastingForDays(int days) {
         this.days = days;
         return this;
+    }
+
+    private void sendEmail(Identity from, Identity to, EmailTemplate.MailType type) {
+        new Email(from, to,
+                EmailTemplate.getSubject(type, employee, fromDate, toDate()),
+                EmailTemplate.getBody(type, employee, fromDate, toDate())).send();
     }
 
     private LocalDate toDate() {
