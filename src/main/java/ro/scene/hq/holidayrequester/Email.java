@@ -7,34 +7,14 @@ public class Email {
     private Identity from;
     private Identity to;
 
-    public Email withSubject(String subject) {
-        this.subject = subject;
-        return this;
-    }
-
-    public Email withBody(String body) {
-        this.body = body;
-        return this;
-    }
-
-    public Email from(Identity from) {
+    public Email(Identity from, Identity to, String subject, String body) {
         this.from = from;
-        return this;
-    }
-
-    public Email to(Identity to) {
         this.to = to;
-        return this;
+        this.subject = subject;
+        this.body = body;
     }
 
     public void send() {
-        System.out.println("-------------------------------");
-        System.out.println("Sending email");
-        System.out.println("-------------------------------");
-        System.out.println("From: " + from.email);
-        System.out.println("To: " + to.email);
-        System.out.println("Subject: " + subject);
-        System.out.println("---");
-        System.out.println(body);
+        SystemConfiguration.EMAIL_SENDER.send(from.email, to.email, subject, body);
     }
 }

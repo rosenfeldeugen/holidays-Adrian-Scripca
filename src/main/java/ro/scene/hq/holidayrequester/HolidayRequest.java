@@ -12,29 +12,21 @@ public class HolidayRequest {
     private int days;
 
     public void send() {
-        LocalDate toDate = LocalDate.from(fromDate).plusDays(days);
-        EmailTemplate.employeeRequestingHoliday(employee, fromDate, toDate)
-                .from(employee)
-                .to(manager)
-                .send();
+        new Email(employee, manager,
+                EmailTemplate.getSubject(EmailTemplate.MailType.REQUEST, employee, fromDate, toDate()),
+                EmailTemplate.getBody(EmailTemplate.MailType.REQUEST, employee, fromDate, toDate())).send();
     }
 
     public void accept() {
-        EmailTemplate.managerAcceptingRequest(employee, fromDate, toDate())
-                .from(manager)
-                .to(SystemConfiguration.HR_IDENTITY)
-                .send();
-    }
-
-    private LocalDate toDate() {
-        return LocalDate.from(fromDate).plusDays(days);
+        new Email(manager, SystemConfiguration.HR_IDENTITY,
+                EmailTemplate.getSubject(EmailTemplate.MailType.ACCEPT, employee, fromDate, toDate()),
+                EmailTemplate.getBody(EmailTemplate.MailType.ACCEPT, employee, fromDate, toDate())).send();
     }
 
     public void reject() {
-        EmailTemplate.managerRejectingRequest(fromDate, toDate())
-                .from(manager)
-                .to(employee)
-                .send();
+        new Email(manager, employee,
+                EmailTemplate.getSubject(EmailTemplate.MailType.REJECT, employee, fromDate, toDate()),
+                EmailTemplate.getBody(EmailTemplate.MailType.REJECT, employee, fromDate, toDate())).send();
     }
 
     public HolidayRequest fromEmployee(Identity employee) {
@@ -55,5 +47,9 @@ public class HolidayRequest {
     public HolidayRequest lastingForDays(int days) {
         this.days = days;
         return this;
+    }
+
+    private LocalDate toDate() {
+        return LocalDate.from(fromDate).plusDays(days);
     }
 }
