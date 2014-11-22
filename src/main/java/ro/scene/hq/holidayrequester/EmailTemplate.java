@@ -14,7 +14,7 @@ public class EmailTemplate {
         REJECT
     }
 
-    public static String getSubject(MailType type, Identity employee, LocalDate from, LocalDate to) {
+    public static String getSubject(MailType type) {
         switch (type) {
             case REQUEST:
                 return "Holiday request";

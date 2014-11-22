@@ -45,7 +45,7 @@ public class HolidayRequest {
 
     private void sendEmail(Identity from, Identity to, EmailTemplate.MailType type) {
         new Email(from, to,
-                EmailTemplate.getSubject(type, employee, fromDate, toDate()),
+                EmailTemplate.getSubject(type),
                 EmailTemplate.getBody(type, employee, fromDate, toDate())).send();
     }
 
