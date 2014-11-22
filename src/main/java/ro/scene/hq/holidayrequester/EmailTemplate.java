@@ -8,7 +8,7 @@ public class EmailTemplate {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
-    public static Email holidayRequestContent(String employeeName, Date from, Date to) {
+    public static Email employeeRequestingHoliday(String employeeName, Date from, Date to) {
         Email email = new Email();
         email.subject = "Holiday request";
         email.body = MessageFormat.format("Dear Manager\n\n" +
@@ -18,7 +18,7 @@ public class EmailTemplate {
         return email;
     }
 
-    public static Email holidayRequestAcceptedContent(String employeeName, Date from, Date to) {
+    public static Email managerAcceptingRequest(String employeeName, Date from, Date to) {
         Email email = new Email();
         email.subject = "Holiday request accepted";
         email.body = MessageFormat.format("Dear HR department,\n\n" +
@@ -30,7 +30,7 @@ public class EmailTemplate {
         return email;
     }
 
-    public static Email holidayRequestRejectedContent(Date from, Date to) {
+    public static Email managerRejectingRequest(Date from, Date to) {
         Email email = new Email();
         email.subject = "Holiday request rejected";
         email.body = MessageFormat.format("My dear employee,\n\n" +
