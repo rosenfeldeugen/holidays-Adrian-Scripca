@@ -7,14 +7,6 @@ public class Email {
     private Identity from;
     private Identity to;
 
-    public void send() {
-        System.out.println("From: " + from.email);
-        System.out.println("To: " + to.email);
-        System.out.println("Subject: " + subject);
-        System.out.println("---");
-        System.out.println(body);
-    }
-
     public Email withSubject(String subject) {
         this.subject = subject;
         return this;
@@ -33,5 +25,16 @@ public class Email {
     public Email to(Identity to) {
         this.to = to;
         return this;
+    }
+
+    public void send() {
+        System.out.println("-------------------------------");
+        System.out.println("Sending email");
+        System.out.println("-------------------------------");
+        System.out.println("From: " + from.email);
+        System.out.println("To: " + to.email);
+        System.out.println("Subject: " + subject);
+        System.out.println("---");
+        System.out.println(body);
     }
 }
