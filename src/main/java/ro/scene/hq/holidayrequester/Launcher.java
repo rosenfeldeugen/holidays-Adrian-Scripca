@@ -12,8 +12,8 @@ public class Launcher {
         request.managerEmail = "boss@iquestgroup.com";
         request.hrEmail = "hr@iquestgroup.com";
 
-        request.from = new Date(System.currentTimeMillis());
-        request.to = new Date(System.currentTimeMillis() + 24 * 3600 * 1000);
+        request.fromDate = new Date(System.currentTimeMillis());
+        request.toDate = new Date(System.currentTimeMillis() + 24 * 3600 * 1000);
 
         request.register();
     }
