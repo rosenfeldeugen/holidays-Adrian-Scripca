@@ -1,8 +1,10 @@
-package ro.scene.hq.holidayrequester;
+package ro.scene.hq.holidays;
+
+import ro.scene.hq.holidays.DeliveryService;
 
 import java.util.Collection;
 
-public class ConsolePrintEmailSender implements EmailSender {
+public class DeliveryServiceConsole implements DeliveryService {
 
     @Override
     public void send(String from, String to, String subject, String body, Collection<String> cc) {

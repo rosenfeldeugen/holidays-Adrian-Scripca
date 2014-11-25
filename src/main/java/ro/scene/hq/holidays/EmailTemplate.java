@@ -1,4 +1,4 @@
-package ro.scene.hq.holidayrequester;
+package ro.scene.hq.holidays;
 
 import java.text.MessageFormat;
 import java.time.LocalDate;
