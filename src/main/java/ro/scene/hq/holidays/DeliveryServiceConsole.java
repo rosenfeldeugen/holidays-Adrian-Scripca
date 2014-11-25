@@ -7,9 +7,9 @@ import java.util.Collection;
 public class DeliveryServiceConsole implements DeliveryService {
 
     @Override
-    public void send(String from, String to, String subject, String body, Collection<String> cc) {
+    public void deliver(String from, String to, String subject, String body, Collection<String> cc) {
         System.out.println("-------------------------------");
-        System.out.println("Sending email");
+        System.out.println("Sending message");
         System.out.println("-------------------------------");
         System.out.println("From: " + from);
         System.out.println("To: " + to);

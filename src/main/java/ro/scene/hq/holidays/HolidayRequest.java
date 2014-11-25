@@ -1,6 +1,7 @@
 package ro.scene.hq.holidays;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class HolidayRequest {
 
@@ -12,20 +13,20 @@ public class HolidayRequest {
 
     private int days;
 
-    public void send() {
+    public void submit(DeliveryService deliveryService) {
         Email email = EmailTemplate.createSubmitEmail(employee, manager, fromDate, toDate());
-        email.send();
+        email.send(deliveryService);
     }
 
-    public void accept() {
+    public void accept(DeliveryService deliveryService) {
         Email email = EmailTemplate.createAcceptEmail(manager, employee, fromDate, toDate());
-        email.ccTo(SystemConfiguration.HR_IDENTITY);
-        email.send();
+        email.ccTo(SystemConfiguration.HR_DEPARTMENT);
+        email.send(deliveryService);
     }
 
-    public void reject() {
+    public void reject(DeliveryService deliveryService) {
         Email email = EmailTemplate.createRejectEmail(manager, employee, fromDate, toDate());
-        email.send();
+        email.send(deliveryService);
     }
 
     public HolidayRequest fromEmployee(Identity employee) {

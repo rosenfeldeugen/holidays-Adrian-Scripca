@@ -26,7 +26,7 @@ public class Email {
         cc.add(identity.email);
     }
 
-    public void send() {
-        SystemConfiguration.EMAIL_SENDER.send(from.email, to.email, subject, body, cc);
+    public void send(DeliveryService deliveryService) {
+        deliveryService.deliver(from.email, to.email, subject, body, cc);
     }
 }

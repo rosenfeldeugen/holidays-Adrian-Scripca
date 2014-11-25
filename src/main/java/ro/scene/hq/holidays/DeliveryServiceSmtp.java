@@ -30,7 +30,7 @@ public class DeliveryServiceSmtp implements DeliveryService {
     }
 
     @Override
-    public void send(String from, String to, String subject, String body, Collection<String> cc) {
+    public void deliver(String from, String to, String subject, String body, Collection<String> cc) {
         try {
             Message message = new MimeMessage(smtpSession);
             message.setFrom(new InternetAddress(from));
