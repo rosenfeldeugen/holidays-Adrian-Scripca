@@ -1,26 +1,31 @@
 package ro.scene.hq.holidayrequester;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class HolidayRequest {
 
     private Identity employee;
+
     private Identity manager;
 
     private LocalDate fromDate;
+
     private int days;
 
     public void send() {
-        sendEmail(employee, manager, EmailTemplate.MailType.REQUEST);
+        Email email = EmailTemplate.createSubmitEmail(employee, manager, fromDate, toDate());
+        email.send();
     }
 
     public void accept() {
-        sendEmail(manager, SystemConfiguration.HR_IDENTITY, EmailTemplate.MailType.ACCEPT);
+        Email email = EmailTemplate.createAcceptEmail(manager, employee, fromDate, toDate());
+        email.ccTo(SystemConfiguration.HR_IDENTITY);
+        email.send();
     }
 
     public void reject() {
-        sendEmail(manager, employee, EmailTemplate.MailType.REJECT);
+        Email email = EmailTemplate.createRejectEmail(manager, employee, fromDate, toDate());
+        email.send();
     }
 
     public HolidayRequest fromEmployee(Identity employee) {
@@ -41,12 +46,6 @@ public class HolidayRequest {
     public HolidayRequest lastingForDays(int days) {
         this.days = days;
         return this;
-    }
-
-    private void sendEmail(Identity from, Identity to, EmailTemplate.MailType type) {
-        new Email(from, to,
-                EmailTemplate.getSubject(type),
-                EmailTemplate.getBody(type, employee, fromDate, toDate())).send();
     }
 
     private LocalDate toDate() {
