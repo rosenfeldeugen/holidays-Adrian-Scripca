@@ -6,6 +6,10 @@ public class Launcher {
 
     public static void main(String... args) {
         DeliveryService deliveryService = new DeliveryServiceConsole();
+	//CR: what's happened if I write in this way?
+	//CR: new HolidayRequest()
+			//.lastingForDays(5)
+            //.accept()
 
         new HolidayRequest()
             .fromEmployee(new Identity("benishor@gmail.com", "Adrian Scripca"))

@@ -8,15 +8,16 @@ import java.util.Collection;
 import java.util.Properties;
 
 public class DeliveryServiceSmtp implements DeliveryService {
-
+	//CR: this should be configurable
     private static final String SMTP_USERNAME = "benishor.github.tests@gmail.com";
-
+	//CR: this should be configurable
     private static final String SMTP_PASSWORD = "testpass123";
-
+	//CR: this can be static
     private Session smtpSession;
 
     public DeliveryServiceSmtp() {
         Properties props = new Properties();
+		//CR: this should be configurable
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -28,16 +29,18 @@ public class DeliveryServiceSmtp implements DeliveryService {
             }
         });
     }
-
+	//CR: this name is too generic but the parameters indicates an email message.
     @Override
     public void deliver(String from, String to, String subject, String body, Collection<String> cc) {
         try {
+			//CR: too many levels of abstraction
+			//CR: you can extract the creation of the message
             Message message = new MimeMessage(smtpSession);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(body);
-
+			//CR: invert the if statement (after extraction)
             if (!cc.isEmpty()) {
                 message.addRecipients(Message.RecipientType.CC, toInternetAddresses(cc));
             }
@@ -47,7 +50,7 @@ public class DeliveryServiceSmtp implements DeliveryService {
             throw new RuntimeException(e);
         }
     }
-
+//CR: the name is not the best one. It sounds like the DeliveryServiceSmtp can be converted to InternetAddresses
     private Address[] toInternetAddresses(Collection<String> emails) throws AddressException {
         Address[] result = new Address[emails.size()];
 

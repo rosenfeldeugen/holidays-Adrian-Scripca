@@ -2,7 +2,8 @@ package ro.scene.hq.holidays;
 
 import java.time.LocalDate;
 import java.util.List;
-
+//CR: I like fluent API but here the implementation was not the best one.
+//CR: you can call accept after fromEmployee instead of submit, and without giving all the necessary data
 public class HolidayRequest {
 
     private Identity employee;

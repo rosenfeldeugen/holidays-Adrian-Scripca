@@ -8,11 +8,11 @@ public class Email {
     private String subject;
 
     private String body;
-
+//CR:unnecessary dependency on Identity. We required just an email address
     private Identity from;
-
+//CR:unnecessary dependency on Identity. We required just an email address
     private Identity to;
-
+//CR:There is no scenario where cc is needed.
     private Set<String> cc = new HashSet<>();
 
     public Email(Identity from, Identity to, String subject, String body) {
